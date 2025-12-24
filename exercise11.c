@@ -1,33 +1,24 @@
 #include <stdio.h>
 
-static int gcd(int a, int b) {
-	while (b != 0) {
-		int t = b;
-		b = a % b;
-		a = t;
-	}
-	return a < 0 ? -a : a; 
-}
-
 int main(void) {
-	int a, b;
+	int n;
 
-	printf("Enter two integers: ");
-	if (scanf("%d %d", &a, &b) != 2) {
+	printf("Enter number of terms (>=1): ");
+	if (scanf("%d", &n) != 1 || n < 1) {
 		printf("Invalid input.\n");
 		return 1;
 	}
 
-	if (a == 0 && b == 0) {
-		printf("GCD and LCM are undefined when both numbers are zero.\n");
-		return 0;
+	unsigned long long a = 0, b = 1;
+
+	printf("Fibonacci series up to %d terms:\n", n);
+	for (int i = 1; i <= n; i++) {
+		printf("%llu", b);
+		if (i < n) printf(" ");
+		unsigned long long next = a + b;
+		a = b;
+		b = next;
 	}
-
-	int g = gcd(a, b);
-	long long lcm = (long long)a / g * b; 
-	if (lcm < 0) lcm = -lcm;
-
-	printf("GCD: %d\n", g);
-	printf("LCM: %lld\n", lcm);
+	printf("\n");
 	return 0;
 }
